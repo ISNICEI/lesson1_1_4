@@ -1,9 +1,12 @@
 package jm.task.core.jdbc.model;
 
+import org.hibernate.annotations.Entity;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+@Entity
 @Table
 public class User {
     @Id
@@ -70,3 +73,4 @@ public class User {
                 '}';
     }
 }
+
