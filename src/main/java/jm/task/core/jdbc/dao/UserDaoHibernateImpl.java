@@ -2,7 +2,6 @@ package jm.task.core.jdbc.dao;
 
 import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.util.Util;
-import org.hibernate.HibernateError;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -20,13 +19,10 @@ public class UserDaoHibernateImpl implements UserDao {
     Transaction tx = null;
     try (Session session = Util.HibernateGetConnection().openSession()) {
       tx = session.beginTransaction();
-      String sql =
-          """
-                    CREATE TABLE IF NOT EXISTS  Users (
-                        id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-                        name VARCHAR(255) NOT NULL,
-                        lastName VARCHAR(255),
-                        age TINYINT);""";
+      String sql ="CREATE TABLE IF NOT EXISTS users (" +
+              "id INT AUTO_INCREMENT PRIMARY KEY, " +
+              "name VARCHAR(50), " +
+              "lastName VARCHAR(50), age INT)";
       session.createSQLQuery(sql).executeUpdate();
       tx.commit();
     } catch (HibernateException e) {
@@ -40,9 +36,10 @@ public class UserDaoHibernateImpl implements UserDao {
   @Override
   public void dropUsersTable() {
     Transaction tx = null;
+    String sql = "DROP TABLE IF EXISTS users";
     try (Session session = Util.HibernateGetConnection().openSession()) {
       tx = session.beginTransaction();
-      session.createSQLQuery("DROP TABLE users").executeUpdate();
+      session.createSQLQuery(sql).executeUpdate();
       tx.commit();
     } catch (HibernateException e) {
       e.printStackTrace();
