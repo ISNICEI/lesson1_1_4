@@ -1,6 +1,7 @@
 package jm.task.core.jdbc.util;
 
 import jm.task.core.jdbc.model.User;
+import jm.task.core.jdbc.service.ServiceLogs;
 import org.hibernate.HibernateError;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -16,10 +17,11 @@ public class Util {
   private static final String DB_PASSWORD = "162160Zz";
   private static Connection connection;
   private static SessionFactory sessionFactory;
+  private ServiceLogs logs;
 
   private Util() {}
 
-  public static SessionFactory HibernateGetConnection() {
+  public static SessionFactory hibernateGetConnection() {
 
     if (sessionFactory == null) {
       try {

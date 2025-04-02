@@ -7,11 +7,9 @@ import jm.task.core.jdbc.util.Util;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 public class UserDaoJDBCImpl implements UserDao {
   private static Connection connection = Util.getConnectionJDBC();
-  private static final Logger LOGGER = Logger.getLogger(UserDaoJDBCImpl.class.getName());
   private ServiceLogs logs;
 
   public UserDaoJDBCImpl() {
