@@ -17,6 +17,8 @@ public class Util {
   private static Connection connection;
   private static SessionFactory sessionFactory;
 
+  private Util() {}
+
   public static SessionFactory HibernateGetConnection() {
 
     if (sessionFactory == null) {
@@ -60,6 +62,16 @@ public class Util {
       return DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
     } catch (SQLException e) {
       throw new RuntimeException(e);
+    }
+  }
+
+  public static void closeConnectionJDBC(Connection conn) {
+    if (conn != null) {
+      try {
+        conn.close();
+      } catch (SQLException e) {
+        throw new RuntimeException(e);
+      }
     }
   }
 }
